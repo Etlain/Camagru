@@ -1,0 +1,44 @@
+body{
+  margin: auto;
+  min-height: 100%;
+  background-color: #dddddd;
+  position: relative;
+}
+
+@font-face {
+    font-family: 'Chunkfive';
+    src: url('fonts/Chunkfive.otf') format('otf'),
+         url('fonts/Chunkfive.svg') format('svg'),
+         url('fonts/Chunkfive.ttf') format('ttf'),
+         url('fonts/Chunkfive.woff') format('woff');
+}
+
+#header{
+  background-color: #191919;
+  color: #787878;
+}
+
+#container_logo{
+  text-align: center;
+}
+
+#logo{
+  width: 88px;
+  height: 96px;
+}
+
+#site_name{
+  font-size: 20px;
+  font-family: 'Chunkfive', Arial, serif;
+  margin-bottom: 0px;
+  text-align: center;
+}
+
+#footer{
+  height:100px;
+  background-color: #191919;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+}

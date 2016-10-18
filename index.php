@@ -1,9 +1,14 @@
+<?php
+    session_start();
+    $_SESSION['login'] = "";
+?>
 <!DOCTYPE>
 <html>
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" type="text/css" href="index.css">
-  <link rel="stylesheet" type="text/css" media="screen and (max-width: 400px)" href="responsive.css">
+<?php
+  include("css/css.php");
+?>
   <title>Camagru</title>
 <head>
 <body>
@@ -12,21 +17,17 @@
       <img id="logo" src="images/logo.gif" alt="logo webcam" title="logo">
       <h1 id="site_name">Camagru</h1>
     </div>
-    <nav>
-      <div><a href="#">Montage</a></div>
-      <div><a href="#">Galerie</a></div>
-      <div><a href="#">Mon compte</a></div>
-      <div><a href="#">Contact</a></div>
-    </nav>
+<?php
+  if ($_SESSION['login'] == "1")
+    include("section/nav.html"); // condition
+?>
   </header>
-<div id="container_section">
-  <section id="webcam">
-    test
-  </section>
-  <section id="picture">
-    tst
-  </section>
-</div>
+  <?php
+  if ($_SESSION['login'] == "1")
+      include("section/montage.php"); // condition
+  else
+      include("section/login.php");
+  ?>
   <footer id="footer">
   </footer>
 </body>
