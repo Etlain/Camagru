@@ -18,12 +18,12 @@
       <h1 id="site_name">Camagru</h1>
     </div>
 <?php
-  if ($_SESSION['login'] == "1")
+  if (!empty($_SESSION['login']))
     include("section/nav.html"); // condition
 ?>
   </header>
   <?php
-  if ($_SESSION['login'] == "1")
+  if (!empty($_SESSION['login']))
       include("section/montage.php"); // condition
   else
       include("section/login.php");
