@@ -1,11 +1,13 @@
 <?php
     session_start();
     $_SESSION['logged'] = "";
+    include_once("config/database.php");
 ?>
 <!DOCTYPE>
 <html>
 <head>
   <meta charset="UTF-8">
+  <link rel="icon" href="/images/logo.ico" />
 <?php
   include("css/css.php");
 ?>
@@ -14,17 +16,19 @@
 <body>
   <header id="header">
     <div id="container_logo">
-      <a href="index.php"><img id="logo" src="images/logo2.gif" alt="logo webcam" title="logo"></a>
+      <a href="index.php"><img id="logo" src="images/logo.gif" alt="logo webcam" title="logo"></a>
       <h1 id="site_name">Camagru</h1>
     </div>
 <?php
   if (!empty($_SESSION['logged']))
-    include("section/nav.html"); // condition
+    include("section/nav.html");
 ?>
   </header>
   <?php
   if (!empty($_SESSION['logged']))
-      include("section/montage.php"); // condition
+      include("section/montage.php");
+  else if (!empty($_GET['key']) && !empty($_GET['login']))
+      include("compte/activation.php");
   else
       include("section/connect.php");
   ?>
