@@ -1,0 +1,38 @@
+body{
+  background-color: #dddddd;
+  position: relative;
+  margin: auto;
+  height: 100%;
+}
+
+#header{
+  background-color: #191919;
+  color: #787878;
+}
+
+#container_logo{
+  text-align: center;
+}
+
+#logo{
+  width: 88px;
+  height: 96px;
+}
+
+#site_name{
+  font-size: 20px;
+  font-family: 'Florence', cursive;
+  text-shadow: #fff 0 0 10px;
+  color: white;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+#footer{
+  height:100px;
+  background-color: #191919;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+}

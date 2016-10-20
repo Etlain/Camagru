@@ -1,0 +1,31 @@
+section{
+  color: #303030;
+  //text-align: center;
+  //min-height: 50%;
+}
+
+a{
+  color: #303030;
+}
+#test{
+
+}
+
+section{
+  width: 250px;
+  height: auto;
+  margin: auto;
+}
+
+#lien{
+  //text-align: center;
+}
+
+#container_logo{
+  text-align: center;
+}
+
+#logo{
+  width: 88px;
+  height: 96px;
+}

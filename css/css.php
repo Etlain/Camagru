@@ -1,5 +1,6 @@
+<link rel="stylesheet" type="text/css" href="css/main.css">
 <?php
-if ($_SESSION['login'] == "1")
+if (!empty($_SESSION['logged']))
 {
 ?>
   <link rel="stylesheet" type="text/css" href="css/index.css">
@@ -8,4 +9,4 @@ if ($_SESSION['login'] == "1")
 }
 else
 ?>
-  <link rel="stylesheet" type="text/css" href="css/login.css">
+  <link rel="stylesheet" type="text/css" href="css/form.css">

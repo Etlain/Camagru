@@ -1,10 +1,17 @@
+<section>
 <h2>Connexion</h2>
 <form>
-  Login :<input type="text" name="login">
+  Login :<br /><input type="text" name="l_login">
   <br />
   <br />
-  Password :<input type="text" name="login">
+  Password :<br /><input type="password" name="l_pwd">
   <br />
   <br />
-  <input type="submit" name="submit" value="Ok">
+  <input type="submit" name="submit" value="Connexion">
 </form>
+<div>
+<a href="?form=forget">Mot de passe oublié</a>
+<br />
+<a href="?form=create">Creer un compte</a>
+</div>
+</section>

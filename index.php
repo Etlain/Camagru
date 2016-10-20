@@ -1,6 +1,6 @@
 <?php
     session_start();
-    $_SESSION['login'] = "";
+    $_SESSION['logged'] = "";
 ?>
 <!DOCTYPE>
 <html>
@@ -14,20 +14,21 @@
 <body>
   <header id="header">
     <div id="container_logo">
-      <img id="logo" src="images/logo.gif" alt="logo webcam" title="logo">
+      <a href="index.php"><img id="logo" src="images/logo2.gif" alt="logo webcam" title="logo"></a>
       <h1 id="site_name">Camagru</h1>
     </div>
 <?php
-  if (!empty($_SESSION['login']))
+  if (!empty($_SESSION['logged']))
     include("section/nav.html"); // condition
 ?>
   </header>
   <?php
-  if (!empty($_SESSION['login']))
+  if (!empty($_SESSION['logged']))
       include("section/montage.php"); // condition
   else
-      include("section/login.php");
+      include("section/connect.php");
   ?>
+  <?php // javascript pour faire en sorte que le footer sois en bas, modifier la taille de l element au dessus lui donner 100px de plus?>
   <footer id="footer">
   </footer>
 </body>
