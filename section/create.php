@@ -11,7 +11,7 @@
   <br />
   <br />
   <?php
-  echo $error;
+  echo "<span style='color:red'>".$error."</span>";
   $error = "";
   ?>
   <br />

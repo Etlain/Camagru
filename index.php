@@ -1,7 +1,10 @@
 <?php
     session_start();
-    $_SESSION['logged'] = "";
+    $error = "";
     include_once("config/database.php");
+    include("compte/login_bdd.php");
+    if (!empty($_GET['nav']) && $_GET['nav'] == "logout")
+      include("session/logout.php");
 ?>
 <!DOCTYPE>
 <html>
@@ -17,11 +20,11 @@
   <header id="header">
     <div id="container_logo">
       <a href="index.php"><img id="logo" src="images/logo.gif" alt="logo webcam" title="logo"></a>
-      <h1 id="site_name">Camagru</h1>
+      <a href="index.php" style="text-decoration:none;"><h1 id="site_name">Camagru</h1></a>
     </div>
 <?php
   if (!empty($_SESSION['logged']))
-    include("section/nav.html");
+    include("section/nav.php");
 ?>
   </header>
   <?php

@@ -6,11 +6,11 @@
   if ($req->fetch())
   {
     $pdo->exec("UPDATE membre SET `actif`='1' WHERE login=".$pdo->quote($_GET['login']));
-    echo "Votre compte a bien ete active.<br />";
-    echo "<a href='index.php'>Cliquez sur ce lien pour revenir sur la page de connection</a>";
+    echo "<div style='text-align:center'>Votre compte a bien ete active.<br />";
+    echo "<a href='index.php'>Cliquez sur ce lien pour revenir sur la page de connection</a></div>";
   }
   else {
-    echo "Erreur avec l'activation du compte.<br />";
-    echo "<a href='index.php'>Cliquez sur ce lien pour revenir sur la page de connection</a>";
+    echo "<div style='text-align:center'>Erreur avec l'activation du compte.<br />";
+    echo "<a href='index.php'>Cliquez sur ce lien pour revenir sur la page de connection</a></div>";
   }
 ?>
