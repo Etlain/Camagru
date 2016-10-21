@@ -7,7 +7,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <link rel="icon" href="/images/logo.ico" />
+  <link rel="icon" href="images/favicon.ico" />
 <?php
   include("css/css.php");
 ?>

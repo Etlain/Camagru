@@ -1,6 +1,6 @@
 <?php
   $key = md5(microtime(TRUE) * 444444);
-  $pdo->exec("UPDATE membre SET `key`='".$key."' WHERE mail='".$_POST['c_mail']."'");
+  //$pdo->exec("UPDATE membre SET `key`='".$key."' WHERE mail='".$_POST['c_mail']."'");
   $sujet = "Activation du compte";
   $entete = "From: activation@camagru.fr";
   $message = '  Bienvenue sur camagru,
@@ -12,5 +12,6 @@
 
   ---------------
   Ceci est un mail automatique, Merci de ne pas y répondre.';
+  //ini_set('SMTP','smtp.sfr.fr');
   mail($_POST['c_mail'], $sujet, $message, $entete);
 ?>

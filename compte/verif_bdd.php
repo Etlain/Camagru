@@ -1,13 +1,5 @@
 <?php
-  include_once("config/database.php"); // modifier adresse
-  $pdo->query("USE camagru");
-
-  function bdd_is($pdo, $champs, $elem){
-    $req = $pdo->query("SELECT id FROM membre WHERE ".$champs."='".$elem."'");
-    if ($req->fetch())
-      return (true);
-    return (false);
-  }
+  include_once("compte/requete.php");
 
   if (!bdd_is($pdo, "login", $_POST['c_login']) && !bdd_is($pdo, "mail", $_POST['c_mail']))
   {

@@ -18,7 +18,10 @@ if (isset($_GET['form']) && $_GET['form'] == "create" && empty($_SESSION['login'
     include("section/create.php");
 }
 else if (isset($_GET['form']) && $_GET['form'] == "forget" && empty($_SESSION['login']))
+{
+  
   include("section/forget.php");
+}
 else
   include("section/login.php");
 ?>
