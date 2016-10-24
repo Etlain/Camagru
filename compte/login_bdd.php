@@ -1,7 +1,6 @@
 <?php
 if (isset($_POST['submit']) && $_POST['submit'] == "Connexion")
 {
-  include("compte/requete.php");
   include("compte/verif.php");
   $_SESSION['login'] = $_POST['l_login'];
   if (bdd_is($pdo, "actif", "1"))

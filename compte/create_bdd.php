@@ -1,6 +1,4 @@
 <?php
-  include_once("compte/requete.php");
-
   if (!bdd_is($pdo, "login", $_POST['c_login']) && !bdd_is($pdo, "mail", $_POST['c_mail']))
   {
     $pwd = hash("whirlpool", hash("gost", "chocolat".$_POST['c_pwd']));

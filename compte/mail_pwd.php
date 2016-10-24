@@ -7,11 +7,11 @@ $message = 'Bienvenue sur camagru,
 Pour reinitialiser votre mot de passe, veuillez cliquer sur le lien ci dessous
 ou copier/coller dans votre navigateur internet.
 
-http://localhost:8080/camagru/index.php?form=forget&rmail='.urlencode($_POST['f_mail']).'&key='.urlencode($key).'
+'.$site.'?form=forget&rmail='.urlencode($_POST['f_mail']).'&key='.urlencode($key).'
 
 
 ---------------
-Ceci est un mail automatique, Merci de ne pas y répondre.';
+Ceci est un mail automatique, merci de ne pas y repondre.';
 //ini_set('SMTP','smtp.sfr.fr');
 mail($_POST['f_mail'], $sujet, $message, $entete);
 echo "<div style='text-align:center'>Un mail vous a ete envoyer.<br />";

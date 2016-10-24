@@ -1,8 +1,9 @@
 <?php
     session_start();
-    $_SESSION['logged'] = "1";
+    //$_SESSION['logged'] = "";
     $error = "";
-    include_once("config/database.php");
+    $site = "http://localhost:8080/camagru/index.php";
+    include_once("compte/requete.php");
     include("compte/login_bdd.php");
     if (!empty($_GET['nav']) && $_GET['nav'] == "logout")
       include("session/logout.php");
@@ -29,12 +30,14 @@
 ?>
   </header>
   <?php
+  //include_once("config/requete.php");
   if (!empty($_SESSION['logged']))
       include("section/montage.php");
-  else if (!empty($_GET['key']) && !empty($_GET['login']))
+  else if (!empty($_GET['key']) && !empty($_GET['login']) && bdd_is($pdo, "actif", "0"))
       include("compte/activation.php");
   else
       include("section/connect.php");
+  $pdo = NULL;
   ?>
   <?php // javascript pour faire en sorte que le footer sois en bas, modifier la taille de l element au dessus lui donner 100px de plus?>
   <!--<footer id="footer">
