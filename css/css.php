@@ -4,7 +4,7 @@ if (!empty($_SESSION['logged']))
 {
 ?>
   <link rel="stylesheet" type="text/css" href="css/index.css">
-  <link rel="stylesheet" type="text/css" media="screen and (max-width: 400px)" href="css/responsive.css">
+  <link rel="stylesheet" type="text/css" media="screen and (max-width: 560px)" href="css/responsive.css">
 <?php
 }
 else

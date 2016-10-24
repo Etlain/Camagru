@@ -39,8 +39,9 @@
       include("section/connect.php");
   $pdo = NULL;
   ?>
+  <div style="height: 150px"></div>
   <?php // javascript pour faire en sorte que le footer sois en bas, modifier la taille de l element au dessus lui donner 100px de plus?>
-  <!--<footer id="footer">
-  </footer>-->
+  <footer id="footer">
+  </footer>
 </body>
 </html>

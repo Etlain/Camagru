@@ -42,7 +42,7 @@ function takepicture() {
       canvas.height = height;
       canvas.getContext('2d').drawImage(video, 0, 0, width, height);
       var data = canvas.toDataURL('image/png');
-      console.log(data);
+      //console.log(data);
       photo.setAttribute('src', data);
     }
 
