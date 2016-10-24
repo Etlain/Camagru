@@ -1,5 +1,6 @@
 <?php
     session_start();
+    $_SESSION['logged'] = "1";
     $error = "";
     include_once("config/database.php");
     include("compte/login_bdd.php");
@@ -36,7 +37,7 @@
       include("section/connect.php");
   ?>
   <?php // javascript pour faire en sorte que le footer sois en bas, modifier la taille de l element au dessus lui donner 100px de plus?>
-  <footer id="footer">
-  </footer>
+  <!--<footer id="footer">
+  </footer>-->
 </body>
 </html>
