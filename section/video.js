@@ -5,7 +5,10 @@
   canvas = document.querySelector('#canvas');
   photo = document.querySelector('#photo');
   take_picture = document.querySelector('#take_picture');
-  width = 320;
+  if (document.body.clientWidth < 600)
+    width = 380;
+  else
+    width = 460;
   height = 0;
 
   navigator.getUserMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.mozGetUserMedia);

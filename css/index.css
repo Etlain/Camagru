@@ -37,18 +37,18 @@ nav div a:hover{
 /* body */
 
 #container_section{
-  display: flex;
-  justify-content: center;
+  //display: flex;
+  //justify-content: center;
+  //height: auto;
   margin: auto;
 }
 #webcam{
-  height:500px;
-  width:600px;
   border: 1px solid black;
-
+  margin: auto;
 }
 
 #picture{
+  //margin: auto;
   height:500px;
   width:200px;
   border: 1px solid black;
