@@ -40,6 +40,10 @@ nav div a:hover{
   //display: flex;
   //justify-content: center;
   //height: auto;
+  //margin: auto;
+}
+#take_picture, #canvas, #video{
+  display: block;
   margin: auto;
 }
 #webcam{
