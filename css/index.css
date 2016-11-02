@@ -46,6 +46,12 @@ nav div a:hover{
   display: block;
   margin: auto;
 }
+
+#canvas_button{
+  margin: auto;
+  text-align: center;
+}
+
 #webcam{
   border: 1px solid black;
   margin: auto;

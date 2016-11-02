@@ -18,7 +18,7 @@
 ?>
   <title>Camagru</title>
 <head>
-<body onmousemove="test(event);">
+<body onmousemove="pos_mouse(event);">
   <header id="header">
     <div id="container_logo">
       <a href="index.php"><img id="logo" src="images/logo.gif" alt="logo webcam" title="logo"></a>

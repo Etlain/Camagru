@@ -9,9 +9,14 @@
 <input type="radio" name="photo" id="tenshinhan"><img style="height:25px; width:12px;" src="images/tenshinhan.png" alt="tenshinhan">
 <input type="radio" name="photo" id="mickey"><img style="height:25px; width:20px;" src="images/mickey.png" alt="mickey">
 <input type="radio" name="photo" id="caca"><img style="height:25px; width:26px;" src="images/caca.png" alt="caca">
+<input type="radio" name="photo" id="evoli"><img style="height:25px; width:29.5px;" src="images/evoli.png" alt="evoli">
 <input type="radio" name="photo" id="aucun">Aucun
 </form>
 <canvas onclick="put_img(event)" id="canvas"></canvas>
+<div id="canvas_button">
+<button id="save_picture">Enregistrer</button>
+<button id="keep_picture">Reprendre</button>
+</div>
 <script type="text/javascript" src="section/video.js"></script>
 </section>
 
@@ -33,15 +38,17 @@ function is_checked(){
   }
   return 0;
 }
+
 function is_img(event){
   var button;
+
+  if (img)
+    img.parentNode.removeChild(img);
+  img = 0;
   if (!(button = is_checked()))
     return ;
   else if (button == "aucun")
   {
-    if (img)
-      img.parentNode.removeChild(img);
-    img = 0;
     b = 0;
     return ;
   }
@@ -56,21 +63,22 @@ function is_img(event){
   img.style.left = String(event.pageX + 1) + "px";
   img.style.top = String(event.pageY + 1) + "px";
 }
-function test(event){
+
+function pos_mouse(event){
   if (b == 1)
   {
     img.style.left = String(event.pageX + 1) + "px";
     img.style.top = String(event.pageY + 1) + "px";
   }
 }
+
 function put_img(event){
   if (img)
   {
     var canvas = document.querySelector('#canvas');
     var x = event.pageX + 1 - canvas.offsetLeft;
     var y = event.pageY + 1 - canvas.offsetTop;
-    console.log(x);
     canvas.getContext('2d').drawImage(img, x, y, img.width, img.height);
-}
+  }
 }
 </script>
