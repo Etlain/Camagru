@@ -10,8 +10,8 @@ if (isset($_POST['submit']) && $_POST['submit'] == "Connexion")
       if (verif_password($_POST['l_pwd'], $error))
       {
         $pwd = hash("whirlpool", hash("gost", 'chocolat'.$_POST['l_pwd']));
-        if (bdd_is($pdo, "mdp", $pwd))
-          $_SESSION['logged'] = "1";
+        if (($id = bdd_is($pdo, "mdp", $pwd)))
+          $_SESSION['logged'] = $id;
         else
           $error = "Mot de passe invalide";
       }

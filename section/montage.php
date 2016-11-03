@@ -1,10 +1,11 @@
 <?php
-  /*if ($_POST['submit'] == "Enregistrer")
+  if ($_POST['submit'] == "Enregistrer")
   {
+    //regex verif contenu image;
     $pdo->prepare();
     $exec = $pdo->prepare("INSERT INTO image(()) VALUES membre");
     $exec->execute(array($_SESSION['rmail'], $_SESSION['key']));
-  }*/
+  }
 ?>
 <div id="container_section">
 <section id="webcam">
@@ -34,6 +35,7 @@
     tst
   </section>-->
 </div>
+</div><span id="test"></span></div>
 <script type="text/javascript">
 var b = 0;
 var img;
@@ -93,7 +95,27 @@ function put_img(event){
     var canvas = document.querySelector('#canvas');
     var x = event.pageX + 1 - canvas.offsetLeft;
     var y = event.pageY + 1 - canvas.offsetTop;
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("POST", "section/test.php", true);
+    xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("test").innerHTML = this.responseText;
+    }
+    }
+    //console.log(canvas.getAttribute("src"));
+    xmlhttp.send("x="+x+"&y="+y+"&src="+canvas.getAttribute("src")+"&img="+img);
     canvas.getContext('2d').drawImage(img, x, y, img.width, img.height);
   }
+  /*var xmlhttp = new XMLHttpRequest();
+  xmlhttp.open("POST", "section/test.php", true);
+  xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("test").innerHTML = this.responseText;
+  }
+  }
+  console.log("here");
+  xmlhttp.send("variable=42");*/
 }
 </script>
