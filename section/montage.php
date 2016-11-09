@@ -39,6 +39,7 @@
 <script type="text/javascript">
 var b = 0;
 var img;
+var button;
 
 function is_checked(){
   var group_button = document.getElementsByName("photo");
@@ -51,7 +52,7 @@ function is_checked(){
 }
 
 function is_img(event){
-  var button;
+  //var button;
 
   if (img)
     img.parentNode.removeChild(img);
@@ -101,15 +102,19 @@ function put_img(event){
     xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xmlhttp.onreadystatechange = function(tmp) {
       if (this.readyState == 4 && this.status == 200) {
-        //document.getElementById("test").setAttribute('src', "data:image/png;base64,"+this.responseText);
         document.getElementById("a").setAttribute('src', "data:image/png;base64,"+this.responseText);
+        canvas.setAttribute('src', "data:image/png;base64,"+this.responseText);
+        var data = new Image();
+        data.src = "data:image/png;base64,"+this.responseText;
+        canvas.getContext('2d').drawImage(data, 0, 0, width, height);
         //document.getElementById("t").innerHTML = this.responseText;
     }
     }
     //console.log(canvas.getAttribute("src"));
+    //document.getElementById("a").setAttribute('src', canvas.getAttribute("src"));
     //urlencode
-    xmlhttp.send("x="+x+"&y="+y+"&src="+encodeURI(canvas.getAttribute("src"))+"&img="+encodeURI(img));
-    canvas.getContext('2d').drawImage(img, x, y, img.width, img.height);
+    xmlhttp.send("x="+x+"&y="+y+"&src="+encodeURI(canvas.getAttribute("src"))+"&name="+encodeURI(button));
+    //canvas.getContext('2d').drawImage(img, x, y, img.width, img.height);
   }
   /*var xmlhttp = new XMLHttpRequest();
   xmlhttp.open("POST", "section/test.php", true);
