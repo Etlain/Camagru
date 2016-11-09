@@ -9,7 +9,7 @@
 <input type="radio" name="photo" id="tenshinhan"><img style="height:25px; width:12px;" src="images/tenshinhan.png" alt="tenshinhan">
 <input type="radio" name="photo" id="mickey"><img style="height:25px; width:20px;" src="images/mickey.png" alt="mickey">
 <input type="radio" name="photo" id="caca"><img style="height:25px; width:26px;" src="images/caca.png" alt="caca">
-<input type="radio" name="photo" id="evoli"><img style="height:25px; width:29.5px;" src="images/evoli.png" alt="evoli">
+<input type="radio" name="photo" id="evoli"><img style="height:25px; width:22px;" src="images/evoli.png" alt="evoli">
 <input type="radio" name="photo" id="aucun">Aucun
 </form>
 <canvas onclick="put_img(event)" id="canvas" src=""></canvas>
@@ -18,13 +18,30 @@
 </div>
 <script type="text/javascript" src="section/video.js"></script>
 </section>
-
-
-  <!--<section id="picture">
-    tst
-  </section>-->
-</div>
 <div><span id="t"></span><img id="a"></div>
+<section id="picture">
+  <?php
+    if (!empty($_GET['del_img']))
+    {
+      //echo $_GET['id_img'];
+      // possible verif id_img is a number
+      $req = $pdo->prepare("DELETE FROM `image` WHERE id=? AND id_membre=?");
+      $req->execute(array($_GET['del_img'], $_SESSION['logged']));
+      //$pdo->("DELETE FROM `image` WHERE id='".."' AND id_membre='".$_SESSION['logged']."'");
+    }
+    $req = $pdo->query("SELECT id,image FROM `image` WHERE id_membre='".$_SESSION['logged']."' ORDER BY id DESC"); // modif id membre
+    $tab = $req->fetchAll();
+    //print_r($tab);
+    //echo($tab[0]['image']);
+    foreach ($tab as $val) {
+      echo "<img style='height:172.5px; width:230px;' src='".$val['image']."'><br />";
+      echo "<form action='index.php' method='get'><button type='submit' name='del_img' value='".$val['id']."'>Supprimer</button>";
+      echo "</form>";
+    }
+    //echo "<img style='height:172.5px; width:230px;' src='".$tab[0]['image']."'>";
+  ?>
+</section>
+</div>
 <script type="text/javascript">
 var b = 0;
 var img;
@@ -111,7 +128,8 @@ function save_img(){
     xmlhttp.onreadystatechange = function(){
       if (this.readyState == 4 && this.status == 200)
       {
-        document.getElementById("t").innerHTML = this.responseText;
+        window.location.reload();
+        //document.getElementById("t").innerHTML = this.responseText;
       }
   }
     xmlhttp.send("src="+encodeURI(canvas.getAttribute("src"))+"&submit=Enregistrer");

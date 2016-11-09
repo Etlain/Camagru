@@ -48,18 +48,19 @@ nav div a:hover{
 }
 
 #canvas_button{
-  margin: auto;
+  //margin: auto;
   text-align: center;
 }
 
 #webcam{
   border: 1px solid black;
-  margin: auto;
+  //margin: auto;
 }
 
 #picture{
   //margin: auto;
   height:500px;
-  width:200px;
+  width:245px;
+  overflow-y: auto;
   border: 1px solid black;
 }

@@ -11,9 +11,9 @@ session_start();
     //include("../compte/requete.php");
     //echo "test ".$_SESSION['logged'];
     $exec = $pdo->prepare("INSERT INTO `image`(`id_membre`, `image`) VALUES (?, ?);");
-    $exec->execute(array($_SESSION['logged'], urldecode($_POST['src'])));
+    $exec->execute(array($_SESSION['logged'], str_replace(' ','+', urldecode($_POST['src']))));
     $pdo = NULL;
-    echo "Image Enregistrer";
+    echo "<div style='text-align:center'>Image Enregistrer</div>";
   }
   else
   {
