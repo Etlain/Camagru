@@ -1,12 +1,3 @@
-<?php
-  if (isset($_POST['submit']) && $_POST['submit'] == "Enregistrer")
-  {
-    //regex verif contenu image;
-    $pdo->prepare();
-    $exec = $pdo->prepare("INSERT INTO image(()) VALUES membre");
-    $exec->execute(array($_SESSION['rmail'], $_SESSION['key']));
-  }
-?>
 <div id="container_section">
 <section id="webcam">
 <video id="video"></video>
@@ -23,9 +14,7 @@
 </form>
 <canvas onclick="put_img(event)" id="canvas" src=""></canvas>
 <div id="canvas_button">
-<form action="index.php" method="post">
-<button type="submit" name="submit" value="Enregistrer" id="save_picture" <?php echo "disabled='disabled'"; ?>>Enregistrer</button>
-</form>
+<button onclick="save_img()" type="submit" name="submit" value="Enregistrer" id="save_picture" <?php echo "disabled='disabled'"; ?>>Enregistrer</button>
 </div>
 <script type="text/javascript" src="section/video.js"></script>
 </section>
@@ -41,7 +30,8 @@ var b = 0;
 var img;
 var button;
 
-function is_checked(){
+function is_checked()
+{
   var group_button = document.getElementsByName("photo");
   for (var i = 0; i < group_button.length; i++)
   {
@@ -51,9 +41,8 @@ function is_checked(){
   return 0;
 }
 
-function is_img(event){
-  //var button;
-
+function is_img(event)
+{
   if (img)
     img.parentNode.removeChild(img);
   img = 0;
@@ -97,34 +86,34 @@ function put_img(event){
     var x = event.pageX + 1 - canvas.offsetLeft;
     var y = event.pageY + 1 - canvas.offsetTop;
     var xmlhttp = new XMLHttpRequest();
-    var tmp;
-    xmlhttp.open("POST", "section/test.php", true);
+    xmlhttp.open("POST", "section/action_img.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xmlhttp.onreadystatechange = function(tmp) {
-      if (this.readyState == 4 && this.status == 200) {
-        document.getElementById("a").setAttribute('src', "data:image/png;base64,"+this.responseText);
+    xmlhttp.onreadystatechange = function(){
+      if (this.readyState == 4 && this.status == 200)
+      {
+        //document.getElementById("a").setAttribute('src', "data:image/png;base64,"+this.responseText);
         canvas.setAttribute('src', "data:image/png;base64,"+this.responseText);
         var data = new Image();
         data.src = "data:image/png;base64,"+this.responseText;
         canvas.getContext('2d').drawImage(data, 0, 0, width, height);
         //document.getElementById("t").innerHTML = this.responseText;
     }
-    }
-    //console.log(canvas.getAttribute("src"));
-    //document.getElementById("a").setAttribute('src', canvas.getAttribute("src"));
-    //urlencode
+  }
     xmlhttp.send("x="+x+"&y="+y+"&src="+encodeURI(canvas.getAttribute("src"))+"&name="+encodeURI(button));
-    //canvas.getContext('2d').drawImage(img, x, y, img.width, img.height);
+}
+}
+
+function save_img(){
+    var canvas = document.querySelector('#canvas');
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("POST", "section/action_img.php", true);
+    xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xmlhttp.onreadystatechange = function(){
+      if (this.readyState == 4 && this.status == 200)
+      {
+        document.getElementById("t").innerHTML = this.responseText;
+      }
   }
-  /*var xmlhttp = new XMLHttpRequest();
-  xmlhttp.open("POST", "section/test.php", true);
-  xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-  xmlhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("test").innerHTML = this.responseText;
-  }
-  }
-  console.log("here");
-  xmlhttp.send("variable=42");*/
+    xmlhttp.send("src="+encodeURI(canvas.getAttribute("src"))+"&submit=Enregistrer");
 }
 </script>

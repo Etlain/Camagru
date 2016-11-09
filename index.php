@@ -1,6 +1,6 @@
 <?php
     session_start();
-    $_SESSION['logged'] = "1"; // = id
+    //$_SESSION['logged'] = ""; // = id
     $error = "";
     $site = "http://localhost:8080/camagru/index.php";
     include_once("compte/requete.php");
@@ -18,7 +18,7 @@
 ?>
   <title>Camagru</title>
 <head>
-<body onmousemove="pos_mouse(event);">
+<body onmousemove="pos_mouse(event)">
   <header id="header">
     <div id="container_logo">
       <a href="index.php"><img id="logo" src="images/logo.gif" alt="logo webcam" title="logo"></a>
@@ -40,7 +40,6 @@
   $pdo = NULL;
   ?>
   <div style="height: 150px"></div>
-  <?php // javascript pour faire en sorte que le footer sois en bas, modifier la taille de l element au dessus lui donner 100px de plus?>
   <footer id="footer">
   </footer>
 </body>
