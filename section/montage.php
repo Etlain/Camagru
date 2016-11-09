@@ -1,5 +1,5 @@
 <?php
-  if ($_POST['submit'] == "Enregistrer")
+  if (isset($_POST['submit']) && $_POST['submit'] == "Enregistrer")
   {
     //regex verif contenu image;
     $pdo->prepare();
@@ -35,7 +35,7 @@
     tst
   </section>-->
 </div>
-</div><span id="test"></span></div>
+<div><span id="t"></span><img id="a"></div>
 <script type="text/javascript">
 var b = 0;
 var img;
@@ -96,15 +96,19 @@ function put_img(event){
     var x = event.pageX + 1 - canvas.offsetLeft;
     var y = event.pageY + 1 - canvas.offsetTop;
     var xmlhttp = new XMLHttpRequest();
+    var tmp;
     xmlhttp.open("POST", "section/test.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xmlhttp.onreadystatechange = function() {
+    xmlhttp.onreadystatechange = function(tmp) {
       if (this.readyState == 4 && this.status == 200) {
-        document.getElementById("test").innerHTML = this.responseText;
+        //document.getElementById("test").setAttribute('src', "data:image/png;base64,"+this.responseText);
+        document.getElementById("a").setAttribute('src', "data:image/png;base64,"+this.responseText);
+        //document.getElementById("t").innerHTML = this.responseText;
     }
     }
     //console.log(canvas.getAttribute("src"));
-    xmlhttp.send("x="+x+"&y="+y+"&src="+canvas.getAttribute("src")+"&img="+img);
+    //urlencode
+    xmlhttp.send("x="+x+"&y="+y+"&src="+encodeURI(canvas.getAttribute("src"))+"&img="+encodeURI(img));
     canvas.getContext('2d').drawImage(img, x, y, img.width, img.height);
   }
   /*var xmlhttp = new XMLHttpRequest();
