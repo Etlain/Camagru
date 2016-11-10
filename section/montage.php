@@ -2,6 +2,11 @@
 <section id="webcam">
 <video id="video"></video>
 <button id="take_picture" <?php echo "disabled='disabled'"; ?>>Prendre une photo</button>
+<div style="text-align:center">
+  ou :<br />
+<input id="file" type="file" name="img_file" <?php echo "disabled='disabled'"; ?>/><br />
+<button id="submit_file" onclick="put_file()" type="submit" name="Valider" <?php echo "disabled='disabled'"; ?>>Valider</button>
+</div>
 <form style="text-align:center;" onclick="is_img(event)">
 <input type="radio" name="photo" id="salameche"><img style="height:25px; width:23px;" src="images/salameche.png">
 <input type="radio" name="photo" id="pikachu"><img style="height:25px; width:28px;" src="images/pikachu.png" alt="pickachu">
@@ -49,6 +54,12 @@ var b = 0;
 var img;
 var button;
 
+function put_file()
+{
+  var x = '<?php echo 'tst';?>';
+  console.log(x);
+}
+
 function is_checked()
 {
   var group_button = document.getElementsByName("photo");
@@ -74,10 +85,14 @@ function is_img(event)
   else if (button == "aucun")
   {
     document.getElementById("take_picture").disabled = "";
+    document.getElementById("file").disabled = "";
+    document.getElementById("submit_file").disabled = "";
     b = 0;
     return ;
   }
   document.getElementById("take_picture").disabled = "";
+  document.getElementById("file").disabled = "";
+  document.getElementById("submit_file").disabled = "";
   b = 1;
   var div = document.createElement("div");
   div.id = "remove";
