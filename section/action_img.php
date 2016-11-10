@@ -1,7 +1,7 @@
 <?php
 session_start();
   //echo $_POST['x'];
-  //echo ($_POST['src']);
+  //echo ($_POST['submit']);
   //$src = imagecreatetruecolor (500, 500);
   //echo $src;
   if (isset($_POST['submit']) && $_POST['submit'] == "Enregistrer")
@@ -9,7 +9,6 @@ session_start();
     include_once("../config/database.php");
     $pdo->query("USE camagru");
     //include("../compte/requete.php");
-    //echo "test ".$_SESSION['logged'];
     $exec = $pdo->prepare("INSERT INTO `image`(`id_membre`, `image`) VALUES (?, ?);");
     $exec->execute(array($_SESSION['logged'], str_replace(' ','+', urldecode($_POST['src']))));
     $pdo = NULL;
@@ -17,9 +16,9 @@ session_start();
   }
   else
   {
+    $name = urldecode($_POST['name']);
     if ($name != "aucun")
     {
-      $name = urldecode($_POST['name']);
       $size = getimagesize("../images/".$name.".png");
       $src = str_replace(' ','+', urldecode($_POST['src']));
       $src = explode(',', $src);

@@ -1,6 +1,6 @@
 <?php
     session_start();
-    //$_SESSION['logged'] = ""; // = id
+    //$_SESSION['logged'] = "1"; // = id
     $error = "";
     $site = "http://localhost:8080/camagru/index.php";
     include_once("compte/requete.php");
@@ -18,7 +18,8 @@
 ?>
   <title>Camagru</title>
 <head>
-<body onmousemove="pos_mouse(event)">
+<!--<body onmousemove="pos_mouse(event)">-->
+<body>
   <header id="header">
     <div id="container_logo">
       <a href="index.php"><img id="logo" src="images/logo.gif" alt="logo webcam" title="logo"></a>

@@ -12,9 +12,11 @@
 <input type="radio" name="photo" id="evoli"><img style="height:25px; width:22px;" src="images/evoli.png" alt="evoli">
 <input type="radio" name="photo" id="aucun">Aucun
 </form>
+<div onmousemove="pos_mouse(event)">
 <canvas onclick="put_img(event)" id="canvas" src=""></canvas>
 <div id="canvas_button">
 <button onclick="save_img()" type="submit" name="submit" value="Enregistrer" id="save_picture" <?php echo "disabled='disabled'"; ?>>Enregistrer</button>
+</div>
 </div>
 <script type="text/javascript" src="section/video.js"></script>
 </section>
@@ -25,7 +27,7 @@
     {
       //echo $_GET['id_img'];
       // possible verif id_img is a number
-      $req = $pdo->prepare("DELETE FROM `image` WHERE id=? AND id_membre=?");
+      $req = $pdo->prepare("DELETE FROM `image` WHERE id=? AND id_membre=?;");
       $req->execute(array($_GET['del_img'], $_SESSION['logged']));
       //$pdo->("DELETE FROM `image` WHERE id='".."' AND id_membre='".$_SESSION['logged']."'");
     }
