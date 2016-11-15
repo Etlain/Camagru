@@ -4,8 +4,10 @@
 <button id="take_picture" <?php echo "disabled='disabled'"; ?>>Prendre une photo</button>
 <div style="text-align:center">
   ou :<br />
+<form method="post" action="index.php" enctype="multipart/form-data">
 <input id="file" type="file" name="img_file" <?php echo "disabled='disabled'"; ?>/><br />
-<button id="submit_file" onclick="put_file()" type="submit" name="Valider" <?php echo "disabled='disabled'"; ?>>Valider</button>
+<button id="submit_file" type="submit" name="Valider" value="Valider" <?php echo "disabled='disabled'"; ?>>Valider</button>
+</form>
 </div>
 <form style="text-align:center;" onclick="is_img(event)">
 <input type="radio" name="photo" id="salameche"><img style="height:25px; width:23px;" src="images/salameche.png">
@@ -18,7 +20,16 @@
 <input type="radio" name="photo" id="aucun">Aucun
 </form>
 <div onmousemove="pos_mouse(event)">
-<canvas onclick="put_img(event)" id="canvas" src=""></canvas>
+  <?php
+    $put_img = 0;
+    if (isset($_POST['Valider']) && $_POST['Valider'] == "Valider" && isset($_FILES['img_file']))
+    {
+      $put_img = 1;
+      $data = base64_encode(file_get_contents($_FILES['img_file']['tmp_name']));
+    }
+  ?>
+<img id="b">
+<canvas onclick="put_img(event)" id="canvas"></canvas>
 <div id="canvas_button">
 <button onclick="save_img()" type="submit" name="submit" value="Enregistrer" id="save_picture" <?php echo "disabled='disabled'"; ?>>Enregistrer</button>
 </div>
@@ -30,7 +41,6 @@
   <?php
     if (!empty($_GET['del_img']))
     {
-      //echo $_GET['id_img'];
       // possible verif id_img is a number
       $req = $pdo->prepare("DELETE FROM `image` WHERE id=? AND id_membre=?;");
       $req->execute(array($_GET['del_img'], $_SESSION['logged']));
@@ -53,12 +63,7 @@
 var b = 0;
 var img;
 var button;
-
-function put_file()
-{
-  var x = '<?php echo 'tst';?>';
-  console.log(x);
-}
+//var img_file;
 
 function is_checked()
 {
@@ -146,9 +151,39 @@ function save_img(){
       if (this.readyState == 4 && this.status == 200)
       {
         window.location.reload();
-        //document.getElementById("t").innerHTML = this.responseText;
+        document.getElementById("t").innerHTML = this.responseText;
       }
   }
     xmlhttp.send("src="+encodeURI(canvas.getAttribute("src"))+"&submit=Enregistrer");
 }
+
+function file_load()
+{
+  var canvas = document.querySelector('#canvas');
+  var img_file = '<?php echo $put_img;?>';
+  //console.log("test");
+  //console.log(img_file);
+  if (img_file == 1)
+  {
+    var data = new Image();
+    data.src = "data:image/png;base64," + '<?php if (isset($data)){echo $data;}?>';
+    //canvas.style = "display:none";
+    //document.getElementById('b').setAttribute('src', data.src);
+    canvas.setAttribute('src', data.src);
+    try{
+        canvas.getContext('2d').drawImage(data, 0, 0, width, height);
+    }
+    catch (e) {
+      if (e == INDEX_SIZE_ERR)
+        console.log("error");
+      if (e == INVALID_STATE_ERR)
+        console.log("error");
+      if (e == TYPE_MISMATCH_ERR)
+        console.log("error");
+    // les instructions pour gérer les autres exceptions
+}
+    console.log(data);
+  }
+}
+  file_load();
 </script>
