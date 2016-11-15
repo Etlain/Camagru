@@ -1,6 +1,7 @@
 <?php
     session_start();
-    $_SESSION['logged'] = "1"; // = id
+    //$_SESSION['logged'] = "1"; // = id
+    //echo $_SESSION['logged'];
     $error = "";
     $site = "http://localhost:8080/camagru/index.php";
     include_once("compte/requete.php");
@@ -33,7 +34,12 @@
   <?php
   //include_once("config/requete.php");
   if (!empty($_SESSION['logged']))
+  {
+    if (isset($_GET['nav']) && $_GET['nav'] == "galerie")
+      include("section/galerie.php");
+    else
       include("section/montage.php");
+  }
   else if (!empty($_GET['key']) && !empty($_GET['login']) && bdd_is($pdo, "actif", "0"))
       include("compte/activation.php");
   else

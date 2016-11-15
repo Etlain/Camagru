@@ -8,4 +8,11 @@ function bdd_is($pdo, $champs, $elem){
     return ($id[0]);
   return (false);
 }
+
+function bdd_is2($pdo, $champs, $elem, $login){
+  $req = $pdo->query("SELECT id FROM membre WHERE ".$champs."='".$elem."' AND login='".$login."'");
+  if (($id = $req->fetch()))
+    return ($id[0]);
+  return (false);
+}
 ?>

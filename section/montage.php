@@ -25,6 +25,7 @@
     if (isset($_POST['Valider']) && $_POST['Valider'] == "Valider" && isset($_FILES['img_file']))
     {
       $put_img = 1;
+      //$data1 = $_FILES['img_file']['tmp_name'];
       $data = base64_encode(file_get_contents($_FILES['img_file']['tmp_name']));
     }
   ?>
@@ -166,23 +167,14 @@ function file_load()
   if (img_file == 1)
   {
     var data = new Image();
+    //data.src = 'images/test.png';
     data.src = "data:image/png;base64," + '<?php if (isset($data)){echo $data;}?>';
     //canvas.style = "display:none";
-    //document.getElementById('b').setAttribute('src', data.src);
+    document.getElementById('b').setAttribute('src', data.src);
     canvas.setAttribute('src', data.src);
-    try{
-        canvas.getContext('2d').drawImage(data, 0, 0, width, height);
-    }
-    catch (e) {
-      if (e == INDEX_SIZE_ERR)
-        console.log("error");
-      if (e == INVALID_STATE_ERR)
-        console.log("error");
-      if (e == TYPE_MISMATCH_ERR)
-        console.log("error");
-    // les instructions pour gérer les autres exceptions
-}
-    console.log(data);
+    canvas.getContext('2d').drawImage(data, 0, 0, width, height);
+    //console.log(data);
+    document.getElementById("save_picture").disabled = "";
   }
 }
   file_load();
