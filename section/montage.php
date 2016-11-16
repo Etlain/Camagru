@@ -45,6 +45,10 @@
       // possible verif id_img is a number
       $req = $pdo->prepare("DELETE FROM `image` WHERE id=? AND id_membre=?;");
       $req->execute(array($_GET['del_img'], $_SESSION['logged']));
+      $req = $pdo->prepare("DELETE FROM `commentaire` WHERE id_image=?;");
+      $req->execute(array($_GET['del_img']));
+      $req = $pdo->prepare("DELETE FROM `like` WHERE id_image=?;");
+      $req->execute(array($_GET['del_img']));
       //$pdo->("DELETE FROM `image` WHERE id='".."' AND id_membre='".$_SESSION['logged']."'");
     }
     $req = $pdo->query("SELECT id,image FROM `image` WHERE id_membre='".$_SESSION['logged']."' ORDER BY id DESC"); // modif id membre
