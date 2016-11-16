@@ -24,9 +24,14 @@
     $put_img = 0;
     if (isset($_POST['Valider']) && $_POST['Valider'] == "Valider" && isset($_FILES['img_file']))
     {
-      $put_img = 1;
+
       //$data1 = $_FILES['img_file']['tmp_name'];
       $data = base64_encode(file_get_contents($_FILES['img_file']['tmp_name']));
+      $tab = getimagesize("data:image/png;base64,".$data);
+      if (!empty($tab))
+        $put_img = 1;
+      else
+        echo "erreur fichier";
     }
   ?>
 <img id="b">

@@ -1,7 +1,6 @@
 <?php
   if (!empty($_GET['rmail']) && !empty($_GET['key']))
   {
-    echo "test";
     $_SESSION['rmail'] = $_GET['rmail'];
     $_SESSION['key'] = $_GET['key'];
   }
@@ -28,11 +27,34 @@
   }
   else if (isset($_POST['submit']) && $_POST['submit'] == "Valider")
   {
+    //echo "here";
     $_SESSION["mail"] = $_POST['f_mail'];
-    if (bdd_is($pdo, "actif", "0"))
+    if (bdd_is3($pdo, "actif", "0", "mail", $_POST['f_mail']))
       $error = "Votre compte n'est pas active";
     else if (verif_mail($_POST['f_mail'], $error) && bdd_is($pdo, "mail", $_POST['f_mail']))
       include("compte/mail_pwd.php");
+      ?>
+      <section>
+      <h2>Mot de passe oublié</h2>
+      <form action="?form=forget" method="post">
+        Mail :<br /><input type="text" name="f_mail" value="<?php echo $_SESSION['mail'];?>">
+        <br />
+        <br />
+        <?php
+        echo "<span style='color:red'>".$error."</span>";
+        $error = "";
+        ?>
+        <br />
+        <br />
+        <input type="submit" name="submit" value="Valider">
+      </form>
+      <div>
+      <a href="index.php">Se connecter</a>
+      <br />
+      <a href="?form=create">Creer un compte</a>
+      </div>
+      </section>
+      <?php
   }
   else
   {

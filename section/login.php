@@ -1,7 +1,7 @@
 <section>
 <h2>Connexion</h2>
 <form action="index.php" method="post">
-  Login :<br /><input type="text" name="l_login" value="<?php echo $_SESSION['login'];?>">
+  Login :<br /><input type="text" name="l_login" value="<?php echo htmlspecialchars($_SESSION['login']);?>">
   <br />
   <br />
   Password :<br /><input type="password" name="l_pwd">

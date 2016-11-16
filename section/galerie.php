@@ -4,10 +4,19 @@
   {
     if (isset($_POST['commenter']) && $_POST['commenter'] == "Commenter")
     {
-      //echo $_SESSION['login'];
-      // proteger champs commentaire
-      $req = $pdo->prepare("INSERT INTO commentaire(`id_image`, `login`, `texte`) VALUES (?, ?, ?)");
-      $req->execute(array($_GET['id_img'], $_SESSION['login'], $_POST['commentaire']));
+      $req = $pdo->prepare("SELECT id FROM `image` WHERE id=?"); // modif id membre
+      $req->execute(array($_GET['img_id']));
+      $res = $req->fetch();
+      if (empty($res))
+        $err = 0;
+      else
+        $err = 1;
+      if ($err != 1)
+      {
+        $req = $pdo->prepare("INSERT INTO commentaire(`id_image`, `login`, `texte`) VALUES (?, ?, ?)");
+        $req->execute(array($_GET['id_img'], $_SESSION['login'], htmlspecialchars($_POST['commentaire'])));
+        include("section/mail_com.php");
+      }
     }
     $req = $pdo->query("SELECT id,image FROM `image` WHERE id='".$_GET['id_img']."'"); // modif id membre
     $tab = $req->fetch();
@@ -26,6 +35,20 @@
     <?php
   }
   else {
+  $req = $pdo->query("SELECT COUNT(id) FROM `image`"); // LIMIT
+  $tab = $req->fetch();
+  $lim = ceil($tab[0] / 5);
+  echo "<ul class='pagination'>";
+  $i = 0;
+  while ($i < $lim)
+  {
+    if ($i != $_GET['page'])
+      echo "<li><a href='?nav=galerie&page=".$i."'>".$i."</a></li>";
+    else
+      echo "<li><a class='active' href='?nav=galerie&page=".$i."'>".$i."</a></li>";
+    $i++;
+  }
+    echo "</ul>";
   if (isset($_GET['like']) && $_GET['like'] == 'ok')
   {
     $req = $pdo->prepare("SELECT status FROM `like` WHERE id_image=? AND id_membre=?"); // modif id membre
@@ -33,7 +56,7 @@
     $res = $req->fetch();
     if (empty($res))
     {
-      $req = $pdo->prepare("SELECT id FROM `image` WHERE id=?"); // modif id membre
+      $req = $pdo->prepare("SELECT id FROM `image` WHERE id=?");
       $req->execute(array($_GET['img_id']));
       $res = $req->fetch();
       if (empty($res))
@@ -57,32 +80,32 @@
       $req->execute(array($_GET['img_id'], $_SESSION['logged']));
     }
   }
-  $req = $pdo->query("SELECT id,image FROM `image` ORDER BY id DESC"); // modif id membre
+  $nb_img = 5;
+  if (empty($_GET['page']))
+    $fact = 0;
+  else
+    $fact = $_GET['page'];
+  $i = $nb_img * $fact;
+  $req = $pdo->query("SELECT id,image FROM `image` ORDER BY id DESC LIMIT ".$i.",".$nb_img); // LIMIT
   $tab = $req->fetchAll();
-  //print_r($tab);
-  //echo($tab[0]['image']);
   foreach ($tab as $val) {
-    $req = $pdo->prepare("SELECT status FROM `like` WHERE id_image=? AND id_membre=?"); // modif id membre
+    $req = $pdo->prepare("SELECT status FROM `like` WHERE id_image=? AND id_membre=?");
     $req->execute(array($val['id'], $_SESSION['logged']));
     $res = $req->fetch();
     if ($res['status'] == '1')
       $like = "j'aime plus";
     else
       $like = "j'aime";
-    $req = $pdo->prepare("SELECT COUNT(status) FROM `like` WHERE id_image=? AND status='1'"); // modif id membre
+    $req = $pdo->prepare("SELECT COUNT(status) FROM `like` WHERE id_image=? AND status='1'");
     $req->execute(array($val['id']));
     $res = $req->fetch();
-    //print_r($res);
-    //echo $res['COUNT(status)'];
     if (!empty($res['COUNT(status)']))
       $nbr_like = $res['COUNT(status)'];
     else
       $nbr_like = "0";
-    $req = $pdo->prepare("SELECT COUNT(id) FROM `commentaire` WHERE id_image=?"); // modif id membre
+    $req = $pdo->prepare("SELECT COUNT(id) FROM `commentaire` WHERE id_image=?");
     $req->execute(array($val['id']));
     $res = $req->fetch();
-    //print_r($res);
-    //echo $res['COUNT(id)'];
     if (!empty($res['COUNT(id)']))
       $nbr_com = $res['COUNT(id)'];
     else
@@ -92,7 +115,18 @@
     echo "<a href='index.php?nav=galerie&id_img=".$val['id']."'>commentaires(".$nbr_com.")</a>";
     echo "</div>";
   }
-  //echo "<img style='height:172.5px; width:230px;' src='".$tab[0]['image']."'>";
+  ?>
+<!--  <ul class="pagination">
+  <li><a href="#">«</a></li>
+  <li><a href="#">1</a></li>
+  <li><a class="active" href="#">2</a></li>
+  <li><a href="#">3</a></li>
+  <li><a href="#">4</a></li>
+  <li><a href="#">5</a></li>
+  <li><a href="#">6</a></li>
+  <li><a href="#">»</a></li>
+</ul>-->
+<?php
 }
 ?>
 </section>

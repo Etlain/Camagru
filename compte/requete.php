@@ -15,4 +15,11 @@ function bdd_is2($pdo, $champs, $elem, $login){
     return ($id[0]);
   return (false);
 }
+
+function bdd_is3($pdo, $champs, $elem, $champs2, $elem2){
+  $req = $pdo->query("SELECT id FROM membre WHERE ".$champs."='".$elem."' AND ".$champs2."='".$elem2."'");
+  if (($id = $req->fetch()))
+    return ($id[0]);
+  return (false);
+}
 ?>
