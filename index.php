@@ -1,7 +1,5 @@
 <?php
     session_start();
-    //$_SESSION['logged'] = "1"; // = id
-    //echo $_SESSION['logged'];
     $error = "";
     $site = "http://localhost:8080/camagru/index.php";
     include_once("compte/requete.php");
