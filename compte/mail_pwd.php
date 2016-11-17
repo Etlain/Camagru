@@ -12,7 +12,6 @@ ou copier/coller dans votre navigateur internet.
 
 ---------------
 Ceci est un mail automatique, merci de ne pas y repondre.';
-//ini_set('SMTP','smtp.sfr.fr');
 mail($_POST['f_mail'], $sujet, $message, $entete);
 echo "<div style='text-align:center'>Un mail vous a ete envoyer.<br />";
 echo "<a href='index.php'>Cliquez sur ce lien pour revenir sur la page de connection</a></div>";

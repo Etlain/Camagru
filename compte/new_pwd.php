@@ -1,7 +1,6 @@
 <?php
   if (bdd_is($pdo, "actif", "1"))
   {
-      // eventuellement regex pour verifier la validite de la key
       $exec = $pdo->prepare("SELECT id FROM membre WHERE mail='?' AND `key`='?'");
       if ($exec->execute(array($_SESSION['rmail'], $_SESSION['key'])))
       {

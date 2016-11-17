@@ -6,8 +6,5 @@
   $pdo->exec("CREATE TABLE IF NOT EXISTS `membre`(`id` int(10) unsigned NOT NULL AUTO_INCREMENT, `login` varchar(12) NOT NULL, `mdp` varchar(130) NOT NULL, `mail` varchar(254) NOT NULL, `key` varchar(32), `actif` INT DEFAULT 0, PRIMARY KEY (`id`), UNIQUE KEY `login` (`login`,`mail`))");
   $pdo->exec("CREATE TABLE IF NOT EXISTS `commentaire`(`id` int(10) unsigned NOT NULL AUTO_INCREMENT, `id_image` int(10) unsigned NOT NULL, `login` varchar(12) NOT NULL, `texte` text NOT NULL, PRIMARY KEY (`id`))");
   $pdo->exec("CREATE TABLE IF NOT EXISTS `like`(`id` int(10) unsigned NOT NULL AUTO_INCREMENT, `id_image` int(10) unsigned NOT NULL, `id_membre` int(10) NOT NULL, `status` INT DEFAULT 0, PRIMARY KEY (`id`))");
-  //$pdo->exec("ALTER TABLE `image` ADD CONSTRAINT `image_membre` FOREIGN KEY (`id_membre`) REFERENCES `membre` (`id`);");
-  //$pdo->exec("ALTER TABLE `commentaire` ADD CONSTRAINT `commentaire_image` FOREIGN KEY (`id_image`) REFERENCES `image` (`id`);");
-  //$pdo->exec("ALTER TABLE `like` ADD CONSTRAINT `like_image` FOREIGN KEY (`id_image`) REFERENCES `image` (`id`);");
   $pdo = NULL;
 ?>

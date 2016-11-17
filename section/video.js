@@ -31,7 +31,6 @@
 video.addEventListener('canplay', function(ev){
     if (!streaming) {
       height = video.videoHeight / (video.videoWidth/width);
-      //console.log(height);
       video.setAttribute('width', width);
       video.setAttribute('height', height);
       canvas.setAttribute('width', width);
@@ -39,21 +38,6 @@ video.addEventListener('canplay', function(ev){
       streaming = true;
     }
   }, false);
-/*
-function takepicture() {
-      canvas.width = width;
-      canvas.height = height;
-      canvas.getContext('2d').drawImage(video, 0, 0, width, height);
-      var data = canvas.toDataURL('image/png');
-      //console.log(data);
-      //keep_img = data;
-      canvas.setAttribute('src', data);
-    }
-
-    take_picture.addEventListener('click', function(ev){
-          takepicture();
-        ev.preventDefault();
-      }, false);*/
 })();
 
 function takepicture() {

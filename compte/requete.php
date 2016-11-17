@@ -1,5 +1,5 @@
 <?php
-include_once("config/database.php"); // modifier adresse
+include_once("config/database.php");
 $pdo->query("USE camagru");
 
 function bdd_is($pdo, $champs, $elem){

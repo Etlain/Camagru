@@ -24,8 +24,6 @@
     $put_img = 0;
     if (isset($_POST['Valider']) && $_POST['Valider'] == "Valider" && isset($_FILES['img_file']))
     {
-
-      //$data1 = $_FILES['img_file']['tmp_name'];
       $data = base64_encode(file_get_contents($_FILES['img_file']['tmp_name']));
       $tab = getimagesize("data:image/png;base64,".$data);
       if (!empty($tab))
@@ -47,25 +45,20 @@
   <?php
     if (!empty($_GET['del_img']))
     {
-      // possible verif id_img is a number
       $req = $pdo->prepare("DELETE FROM `image` WHERE id=? AND id_membre=?;");
       $req->execute(array($_GET['del_img'], $_SESSION['logged']));
       $req = $pdo->prepare("DELETE FROM `commentaire` WHERE id_image=?;");
       $req->execute(array($_GET['del_img']));
       $req = $pdo->prepare("DELETE FROM `like` WHERE id_image=?;");
       $req->execute(array($_GET['del_img']));
-      //$pdo->("DELETE FROM `image` WHERE id='".."' AND id_membre='".$_SESSION['logged']."'");
     }
     $req = $pdo->query("SELECT id,image FROM `image` WHERE id_membre='".$_SESSION['logged']."' ORDER BY id DESC"); // modif id membre
     $tab = $req->fetchAll();
-    //print_r($tab);
-    //echo($tab[0]['image']);
     foreach ($tab as $val) {
       echo "<img style='height:172.5px; width:230px;' src='".$val['image']."'><br />";
       echo "<form action='index.php' method='get'><button type='submit' name='del_img' value='".$val['id']."'>Supprimer</button>";
       echo "</form>";
     }
-    //echo "<img style='height:172.5px; width:230px;' src='".$tab[0]['image']."'>";
   ?>
 </section>
 </div>
@@ -73,7 +66,6 @@
 var b = 0;
 var img;
 var button;
-//var img_file;
 
 function is_checked()
 {
@@ -140,12 +132,10 @@ function put_img(event){
     xmlhttp.onreadystatechange = function(){
       if (this.readyState == 4 && this.status == 200)
       {
-        //document.getElementById("a").setAttribute('src', "data:image/png;base64,"+this.responseText);
         canvas.setAttribute('src', "data:image/png;base64,"+this.responseText);
         var data = new Image();
         data.src = "data:image/png;base64,"+this.responseText;
         canvas.getContext('2d').drawImage(data, 0, 0, width, height);
-        //document.getElementById("t").innerHTML = this.responseText;
     }
   }
     xmlhttp.send("x="+x+"&y="+y+"&src="+encodeURI(canvas.getAttribute("src"))+"&name="+encodeURI(button));
@@ -171,18 +161,15 @@ function file_load()
 {
   var canvas = document.querySelector('#canvas');
   var img_file = '<?php echo $put_img;?>';
-  //console.log("test");
-  //console.log(img_file);
+
   if (img_file == 1)
   {
     var data = new Image();
-    //data.src = 'images/test.png';
+
     data.src = "data:image/png;base64," + '<?php if (isset($data)){echo $data;}?>';
-    //canvas.style = "display:none";
     document.getElementById('b').setAttribute('src', data.src);
     canvas.setAttribute('src', data.src);
     canvas.getContext('2d').drawImage(data, 0, 0, width, height);
-    //console.log(data);
     document.getElementById("save_picture").disabled = "";
   }
 }

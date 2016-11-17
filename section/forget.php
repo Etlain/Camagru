@@ -27,7 +27,6 @@
   }
   else if (isset($_POST['submit']) && $_POST['submit'] == "Valider")
   {
-    //echo "here";
     $_SESSION["mail"] = $_POST['f_mail'];
     if (bdd_is3($pdo, "actif", "0", "mail", $_POST['f_mail']))
       $error = "Votre compte n'est pas active";

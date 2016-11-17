@@ -1,6 +1,5 @@
 <?php
   session_start();
-  //echo $src;
   if (isset($_POST['submit']) && $_POST['submit'] == "Enregistrer")
   {
     include_once("../config/database.php");

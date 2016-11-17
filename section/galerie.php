@@ -35,7 +35,7 @@
     <?php
   }
   else {
-  $req = $pdo->query("SELECT COUNT(id) FROM `image`"); // LIMIT
+  $req = $pdo->query("SELECT COUNT(id) FROM `image`");
   $tab = $req->fetch();
   $lim = ceil($tab[0] / 5);
   echo "<ul class='pagination'>";
@@ -51,7 +51,7 @@
     echo "</ul>";
   if (isset($_GET['like']) && $_GET['like'] == 'ok')
   {
-    $req = $pdo->prepare("SELECT status FROM `like` WHERE id_image=? AND id_membre=?"); // modif id membre
+    $req = $pdo->prepare("SELECT status FROM `like` WHERE id_image=? AND id_membre=?");
     $req->execute(array($_GET['img_id'], $_SESSION['logged']));
     $res = $req->fetch();
     if (empty($res))
@@ -86,7 +86,7 @@
   else
     $fact = $_GET['page'];
   $i = $nb_img * $fact;
-  $req = $pdo->query("SELECT id,image FROM `image` ORDER BY id DESC LIMIT ".$i.",".$nb_img); // LIMIT
+  $req = $pdo->query("SELECT id,image FROM `image` ORDER BY id DESC LIMIT ".$i.",".$nb_img);
   $tab = $req->fetchAll();
   foreach ($tab as $val) {
     $req = $pdo->prepare("SELECT status FROM `like` WHERE id_image=? AND id_membre=?");
@@ -115,18 +115,6 @@
     echo "<a href='index.php?nav=galerie&id_img=".$val['id']."'>commentaires(".$nbr_com.")</a>";
     echo "</div>";
   }
-  ?>
-<!--  <ul class="pagination">
-  <li><a href="#">«</a></li>
-  <li><a href="#">1</a></li>
-  <li><a class="active" href="#">2</a></li>
-  <li><a href="#">3</a></li>
-  <li><a href="#">4</a></li>
-  <li><a href="#">5</a></li>
-  <li><a href="#">6</a></li>
-  <li><a href="#">»</a></li>
-</ul>-->
-<?php
 }
 ?>
 </section>

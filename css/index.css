@@ -1,6 +1,4 @@
 body{
-  //margin: auto;
-  //background-color: #dddddd;
   height: auto;
 }
 
@@ -39,7 +37,6 @@ nav div a:hover{
 #container_section{
   display: flex;
   justify-content: center;
-  //height: auto;
   margin: auto;
 }
 #take_picture, #canvas, #video{
@@ -48,18 +45,15 @@ nav div a:hover{
 }
 
 #canvas_button{
-  //margin: auto;
   text-align: center;
 }
 
 #webcam{
   border: 1px solid black;
   width:500px;
-  //margin: auto;
 }
 
 #picture{
-  //margin: auto;
   height:500px;
   width:245px;
   overflow-y: auto;
