@@ -32,12 +32,13 @@
         echo "erreur fichier";
     }
   ?>
-<img id="b">
-<canvas onclick="put_img(event)" id="canvas"></canvas>
+<img onclick="put_img(event)" id="b">
+<!--<canvas onclick="put_img(event)" id="canvas"></canvas>-->
 <div id="canvas_button">
 <button onclick="save_img()" type="submit" name="submit" value="Enregistrer" id="save_picture" <?php echo "disabled='disabled'"; ?>>Enregistrer</button>
 </div>
 </div>
+<script>var canvas = document.createElement("canvas");</script>
 <script type="text/javascript" src="section/video.js"></script>
 </section>
 <div><span id="t"></span><img id="a"></div>
@@ -123,27 +124,28 @@ function pos_mouse(event){
 function put_img(event){
   if (img)
   {
-    var canvas = document.querySelector('#canvas');
-    var x = event.pageX + 1 - canvas.offsetLeft;
-    var y = event.pageY + 1 - canvas.offsetTop;
+    var image = document.querySelector('#b');
+    var x = event.pageX + 1 - image.offsetLeft;
+    var y = event.pageY + 1 - image.offsetTop;
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.open("POST", "section/action_img.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xmlhttp.onreadystatechange = function(){
       if (this.readyState == 4 && this.status == 200)
       {
-        canvas.setAttribute('src', "data:image/png;base64,"+this.responseText);
-        var data = new Image();
-        data.src = "data:image/png;base64,"+this.responseText;
-        canvas.getContext('2d').drawImage(data, 0, 0, width, height);
+        image.setAttribute('src', "data:image/png;base64,"+this.responseText);
+        //var data = new Image();
+        //data.src = "data:image/png;base64,"+this.responseText;
+        //document.getElementById('b').setAttribute("src", data.src);
+        //canvas.getContext('2d').drawImage(data, 0, 0, width, height);
     }
   }
-    xmlhttp.send("x="+x+"&y="+y+"&src="+encodeURI(canvas.getAttribute("src"))+"&name="+encodeURI(button));
+    xmlhttp.send("x="+x+"&y="+y+"&src="+encodeURI(image.getAttribute("src"))+"&name="+encodeURI(button));
 }
 }
 
 function save_img(){
-    var canvas = document.querySelector('#canvas');
+    var image = document.querySelector('#b');
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.open("POST", "section/action_img.php", true);
     xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -151,10 +153,10 @@ function save_img(){
       if (this.readyState == 4 && this.status == 200)
       {
         window.location.reload();
-        document.getElementById("t").innerHTML = this.responseText;
+        //document.getElementById("t").innerHTML = this.responseText;
       }
   }
-    xmlhttp.send("src="+encodeURI(canvas.getAttribute("src"))+"&submit=Enregistrer");
+    xmlhttp.send("src="+encodeURI(image.getAttribute("src"))+"&submit=Enregistrer");
 }
 
 function file_load()
@@ -164,12 +166,12 @@ function file_load()
 
   if (img_file == 1)
   {
-    var data = new Image();
+    //var data = new Image();
 
-    data.src = "data:image/png;base64," + '<?php if (isset($data)){echo $data;}?>';
-    document.getElementById('b').setAttribute('src', data.src);
-    canvas.setAttribute('src', data.src);
-    canvas.getContext('2d').drawImage(data, 0, 0, width, height);
+    var data = "data:image/png;base64," + '<?php if (isset($data)){echo $data;}?>';
+    document.getElementById('b').setAttribute('src', data);
+    //image.setAttribute('src', data.src);
+    //canvas.getContext('2d').drawImage(data, 0, 0, width, height);
     document.getElementById("save_picture").disabled = "";
   }
 }

@@ -42,7 +42,7 @@
   $i = 0;
   while ($i < $lim)
   {
-    if ($i != $_GET['page'])
+    if (isset($_GET['page']) && $i != $_GET['page'])
       echo "<li><a href='?nav=galerie&page=".$i."'>".$i."</a></li>";
     else
       echo "<li><a class='active' href='?nav=galerie&page=".$i."'>".$i."</a></li>";

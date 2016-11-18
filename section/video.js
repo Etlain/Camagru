@@ -2,7 +2,8 @@
   var streaming = false;
   video = document.querySelector('#video');
   cover = document.querySelector('#cover');
-  canvas = document.querySelector('#canvas');
+  image = document.querySelector('#b');
+  canvas = document.createElement("canvas");
   photo = document.querySelector('#photo');
   take_picture = document.querySelector('#take_picture');
   if (document.body.clientWidth < 600)
@@ -45,7 +46,8 @@ function takepicture() {
       canvas.height = height;
       canvas.getContext('2d').drawImage(video, 0, 0, width, height);
       var data = canvas.toDataURL('image/png');
-      canvas.setAttribute('src', data);
+      image.setAttribute('src', data);
+      //document.parentNode.removeChild(canvas);
     }
 
 take_picture.addEventListener('click', function(ev){
