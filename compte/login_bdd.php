@@ -3,7 +3,7 @@ if (isset($_POST['submit']) && $_POST['submit'] == "Connexion")
 {
   include("compte/verif.php");
   $_SESSION['login'] = $_POST['l_login'];
-  if (bdd_is($pdo, "actif", "1"))
+  if (bdd_is2($pdo, "actif", "1", $_SESSION['login']))
   {
     if (verif_login($_POST['l_login'], $error) && bdd_is($pdo, "login", $_POST['l_login']))
     {
@@ -12,7 +12,6 @@ if (isset($_POST['submit']) && $_POST['submit'] == "Connexion")
         $pwd = hash("whirlpool", hash("gost", 'chocolat'.$_POST['l_pwd']));
         if (($id = bdd_is2($pdo, "mdp", $pwd, $_SESSION['login'])))
         {
-          echo $id;
           $_SESSION['logged'] = $id;
         }
         else

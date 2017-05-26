@@ -1,8 +1,8 @@
 <?php
     session_start();
-    $_SESSION['logged'] = "1";
+    //$_SESSION['logged'] = "1";
     $error = "";
-    $site = "http://localhost:8080/camagru/index.php";
+    $site = "http://mounir1.ledeveloppeur.fr/index.php";
     include_once("compte/requete.php");
     include("compte/login_bdd.php");
     if (!empty($_GET['nav']) && $_GET['nav'] == "logout")

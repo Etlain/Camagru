@@ -6,7 +6,8 @@
       $error = "Vous devez renseigner tous les champs";
       return (false);
     }
-    else if (!preg_match("/^[a-z0-9]{1,64}@[a-z0-9._-]{2,252}\.[a-z]{2,6}$/", $mail))
+    //else if (!preg_match("/^[a-z0-9]{1,64}@[a-z0-9._-]{2,252}\.[a-z]{2,6}$/", $mail))
+    else if (!filter_var($mail, FILTER_VALIDATE_EMAIL))
     {
       $error = "Adresse mail invalide";
       return (false);

@@ -1,12 +1,12 @@
 <div id="container_section">
 <section id="webcam">
 <video id="video"></video>
-<button id="take_picture" <?php echo "disabled='disabled'"; ?>>Prendre une photo</button>
+<button id="take_picture" <?php //echo "disabled='disabled'"; ?>>Prendre une photo</button>
 <div style="text-align:center">
   ou :<br />
 <form method="post" action="index.php" enctype="multipart/form-data">
-<input id="file" type="file" name="img_file" <?php echo "disabled='disabled'"; ?>/><br />
-<button id="submit_file" type="submit" name="Valider" value="Valider" <?php echo "disabled='disabled'"; ?>>Valider</button>
+<input id="file" type="file" name="img_file" <?php //echo "disabled='disabled'"; ?>/><br />
+<button id="submit_file" type="submit" name="Valider" value="Valider" <?php //echo "disabled='disabled'"; ?>>Valider</button>
 </form>
 </div>
 <form style="text-align:center;" onclick="is_img(event)">
@@ -24,12 +24,17 @@
     $put_img = 0;
     if (isset($_POST['Valider']) && $_POST['Valider'] == "Valider" && isset($_FILES['img_file']))
     {
-      $data = base64_encode(file_get_contents($_FILES['img_file']['tmp_name']));
-      $tab = getimagesize("data:image/png;base64,".$data);
-      if (!empty($tab))
-        $put_img = 1;
+      if ($_FILES['img_file']['tmp_name'] != NULL)
+      {
+        $data = base64_encode(file_get_contents($_FILES['img_file']['tmp_name']));
+        $tab = getimagesize("data:image/png;base64,".$data);
+        if (!empty($tab))
+          $put_img = 1;
+        else
+          echo "erreur fichier";
+      }
       else
-        echo "erreur fichier";
+        echo "fichier inexistant";
     }
   ?>
 <img onclick="put_img(event)" id="b">
